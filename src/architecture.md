@@ -1,0 +1,9 @@
+# Architecture
+
+The browser is a Vite/React/TypeScript app with no backend, database, analytics or secret-key input. `src/lib/contract.ts` in the app verifies the RPC testnet passphrase, builds and simulates contract calls, assembles Soroban footprints/fees, asks the Stellar wallet kit to sign, submits once, and polls for confirmation. It does not automatically repeat writes. Public reads need a funded public testnet source account for simulation, but never its secret.
+
+The contract has a thin `src/lib.rs` interface, `src/treasury.rs` business guards, `src/types.rs` stored records/errors/events, and `src/storage.rs` TTL helpers. Persistent records store one group, proposal, or group/member/period payment marker. Instance counters produce ids. Reads and writes renew active records toward network maximum TTL when invoked in a submitted transaction; browser simulation-only reads do not persist renewal. Archived state must be restored instead of reset.
+
+A group records token, members, signers, threshold, dues amount, period length/start and received/spent/balance totals. A proposal records destination, amount, off-chain memo hash, explicit approvals and status. The core invariant is `balance = received - spent`. Token custody is pooled by the contract address, but each group can spend only its own recorded balance. External direct token transfers are not allocated to a group and do not increase its spendable balance.
+
+Bounds: 100 members, 20 signers, and 366 days per period. Membership and threshold cannot change in v0. Authorization and atomic rollback rely on Soroban host rules and the SDK token interface, not custom signature code. See the contract [reuse decision](https://github.com/stellar-duestreasury/duestreasury-contracts/blob/main/docs/decisions/0001-build-vs-reuse.md).

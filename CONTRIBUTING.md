@@ -22,6 +22,7 @@ is a shorter orientation.
 
 ## Checks to run before you push
 
-Once this repo has code, its checks are listed in `AGENTS.md` and run in CI.
-A change that breaks any of them is not ready. Until then, keep commits to
-documentation and hygiene so the history stays honest.
+Run `node --test` and `node scripts/check-links.mjs`. CI also builds mdBook.
+Trace every claim to implemented code or recorded checks, keep TODO(verify)
+for unverified behavior, and preserve the deployment block and second human
+custody review requirement. No deployment or pilot evidence is invented.

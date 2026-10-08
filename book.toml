@@ -1,0 +1,9 @@
+[book]
+title = "DuesTreasury"
+authors = ["Tim Oyelabi"]
+language = "en"
+src = "src"
+description = "Fixed member dues and threshold approved spending on Stellar testnet. Unreviewed custody prototype."
+
+[output.html]
+git-repository-url = "https://github.com/stellar-duestreasury/duestreasury-docs"
