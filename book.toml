@@ -6,4 +6,5 @@ src = "src"
 description = "Fixed member dues and threshold approved spending on Stellar testnet. Unreviewed custody prototype."
 
 [output.html]
+additional-css = ["theme/brand.css"]
 git-repository-url = "https://github.com/stellar-duestreasury/duestreasury-docs"
